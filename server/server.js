@@ -1,22 +1,25 @@
-import express from 'express';
-import cors from 'cors';
-import 'dotenv/config'
+import express from 'express'
+import cors from 'cors'
+import 'dotenv/config';
 import cookieParser from 'cookie-parser';
-import connectDB from './config/db.js';
+import connectDB from './config/mongoDB.js';
 
 const app = express();
-const PORT = process.env.PORT || 4000
+const port = process.env.PORT || 4000
+
+connectDB();
 
 app.use(express.json())
 app.use(cors({credentials:true}))
-app.use(cookieParser());
-connectDB()
+app.use(cookieParser())
 
 app.get('/',(req,res)=>{
-    res.send("Server is live")
+    res.send("API is working")
 })
 
-app.listen(PORT,()=>{
-    console.log(`Server start on :${PORT}`)
+app.listen(port,()=>{
+    console.log(`server started on PORT:${port}`)
 })
+
+
 
