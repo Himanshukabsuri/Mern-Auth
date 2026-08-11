@@ -3,6 +3,7 @@ import cors from 'cors'
 import 'dotenv/config';
 import cookieParser from 'cookie-parser';
 import connectDB from './config/mongoDB.js';
+import authRouter from './routes/authRoute.js';
 
 const app = express();
 const port = process.env.PORT || 4000
@@ -12,6 +13,10 @@ connectDB();
 app.use(express.json())
 app.use(cors({credentials:true}))
 app.use(cookieParser())
+
+// api endpoints
+
+app.use('/api/auth',authRouter)
 
 app.get('/',(req,res)=>{
     res.send("API is working")
